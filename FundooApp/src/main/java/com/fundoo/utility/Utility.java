@@ -3,7 +3,6 @@ package com.fundoo.utility;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Utility
 {
-	@Autowired
 	private static JavaMailSender javaMailSender;
 	
 	private static String token;

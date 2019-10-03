@@ -1,12 +1,28 @@
 package com.fundoo.user.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.Getter;
@@ -16,8 +32,10 @@ import lombok.ToString;
 @SuppressWarnings("unused")
 @Entity
 @Table
+@ConfigurationProperties
 public class UserEntity 
 {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
@@ -27,7 +45,63 @@ public class UserEntity
 	private String password;
 	private String mobileNum;
 	private boolean isVerify;
+	private String fileName;
+
 	private LocalDateTime registerDate = LocalDateTime.now();
+	
+	@JsonIgnore
+	@OneToMany
+    private List<NoteEntity> notes;
+	
+	@JsonIgnore
+	@OneToMany
+    private List<LabelEntity> labels;
+	
+	@JsonIgnore
+	@OneToMany
+	private List<CollaboratorsEntity> collabs;
+	
+	//getterSetters
+	
+	public List<CollaboratorsEntity> getCollabs() 
+	{
+		return collabs;
+	}
+
+	public void setCollabs(List<CollaboratorsEntity> collabs) 
+	{
+		this.collabs = collabs;
+	}
+
+	public String getFileName() 
+	{
+		return fileName;
+	}
+
+	public void setFileName(String fileName) 
+	{
+		this.fileName = fileName;
+	}
+
+	public List<LabelEntity> getLabels() 
+	{
+		return labels;
+	}
+
+	public void setLabels(List<LabelEntity> labels) 
+	{
+		this.labels = labels;
+	}
+	
+	public List<NoteEntity> getNotes() 
+	{
+		return notes;
+	}
+	
+	public void setNotes(List<NoteEntity> notes) 
+	{
+		this.notes = notes;
+	}
 	
 	public Long getUserId() 
 	{

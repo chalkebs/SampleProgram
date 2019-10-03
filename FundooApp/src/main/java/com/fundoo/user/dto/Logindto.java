@@ -2,13 +2,11 @@ package com.fundoo.user.dto;
 
 import javax.persistence.Column;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class Logindto 
 {
 	@Column(name = "email", nullable = false)
-	@Email(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.(?:[A-Z]{2,}|com|org))+$")
 	@NotEmpty(message = "Please provide valid Email ID")
 	private String emailId;
 
